@@ -1,8 +1,12 @@
  
 TRADE_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-SECRET = b'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-nonce_file = "../nonce"
+SECRET = b'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY'
+nonce_file = "./nonce"
+INTERVAL = 15
 
-SELLSPREAD = Decimal("0.2")
-BIDSPREAD = Decimal("0.3")
-INTERVAL = 60
+#############################
+# Параметры стоп-файла
+
+STOP_FILE = "./pairs/"   # Путь к стопфайлу
+SELLSPREAD = "0.2"
+BIDSPREAD = "0.3"
