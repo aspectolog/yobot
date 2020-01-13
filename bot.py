@@ -1,4 +1,3 @@
-import cfg
 import hashlib
 import hmac
 import http.client
@@ -9,8 +8,8 @@ import time
 import urllib
 import subprocess
 from decimal import Decimal
-
 import requests
+from cfg import *  # Читаем наш конфиг
 
 if len(sys.argv) == 2:
     P = sys.argv[1]
@@ -23,6 +22,10 @@ else:
     PAIR = '404_rur'
     P = '404'
 
+# Парсим наш конфиг
+STOP_FILE += P
+SELLSPREAD = Decimal(SELLSPREAD)
+BIDSPREAD = Decimal(BIDSPREAD)
 
 # Создаем nonce, если его нет
 if not os.path.exists(nonce_file):
@@ -30,6 +33,7 @@ if not os.path.exists(nonce_file):
         out.write('1')
 
 
+# Всплывашка
 def sendmess(message):
     subprocess.Popen(['notify-send', '-t', '300000', P, message])
     return
@@ -41,7 +45,7 @@ def getinfo():
     cnt = 0
     while ERR and cnt < 3:
         cnt = cnt + 1
-        otvet = requests.get('https://yobit.io/api/3/depth/' + PAIR)
+        otvet = requests.get('https://yobit.net/api/3/depth/' + PAIR)
         try:
             data = json.loads(otvet.text)
             ERR = False
@@ -80,7 +84,7 @@ def call_api(**kwargs):
         headers = {"Content-type": "application/x-www-form-urlencoded",
                    "Key": TRADE_KEY,
                    "Sign": sign}
-        conn = http.client.HTTPSConnection("yobit.io", timeout=90)
+        conn = http.client.HTTPSConnection("yobit.net", timeout=90)
         conn.request("POST", "/tapi/", payload, headers)
         response = conn.getresponse().read()
         conn.close()
@@ -166,7 +170,6 @@ def Bid_Amount(i):
 
 ###############################################################################################################
 
-stopfile = "./pairs/" + P    # Путь к стопфайлу
 
 BuyOrderVol = Decimal("0")
 SellOrderVol = Decimal("0")
@@ -182,15 +185,15 @@ while True:
     # Получаем один раз цены огромным массивом, дальше работаем с ним.
     PriceData = getinfo()[PAIR]
 
+    # TODO: Пофиксить работу со стопценами и стопфайлом. Бред кошачий.
     # Создаем стоп-цены, если нет
-    if not os.path.exists(stopfile):
-        with open(stopfile, "w") as file:
+    if not os.path.exists(STOP_FILE):
+        with open(STOP_FILE, "w") as file:
             file.write(str((Bid_Price(0) + (Bid_Price(0) * SELLSPREAD)).quantize(Decimal("1.00000000"))) + '\n')
             file.write(str((Ask_Price(0) / (BIDSPREAD + 1)).quantize(Decimal("1.00000000"))))
 
-
     # Получаем стоп-цены
-    with open(stopfile, 'r+') as file:
+    with open(STOP_FILE, 'r+') as file:
         Stop_Sell_Price = Decimal(file.readline()).quantize(Decimal("1.00000000"))
         Stop_Bid_Price = Decimal(file.readline()).quantize(Decimal("1.00000000"))
 
