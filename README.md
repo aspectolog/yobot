@@ -1,7 +1,7 @@
 # bot.py - YoBit spread bot
 Keep the first position in the spread.
 
-Using: bot.py [pair (by default - 404)]
+Using: bot.py [coin (by default - 404)]
 
 Chenge "_rur" in script as you like.
 
