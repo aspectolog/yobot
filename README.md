@@ -1,13 +1,21 @@
 # bot.py - YoBit spread bot
-Keep the first position in the spread.
+###Keep the first position in the spread.
 
-Using: bot.py [coin (by default - 404)]
+####Using:
+1. Edit **cfg.py**
+3. Make sure you have opened position in target pair.
+4. Run this script:
 
-Chenge "_rur" in script as you like.
 
-Warning! Working with Stop-file is breaking.
+    bot.py [Interval_in_sec] [coin]
 
-Dont forget edit cfg.py the first!
+Example:
+
+    python3 bot.py 30 btc
+
+If [coin] is not specified, will used **404_rur** pair by default.
+
+**Warning! Working with Stop-file is breaking.**
 
 
 Бот поддерживает позиции на покупку и продажу по крайним ценам спреда, если цены в коридоре, указанном в текстовом файле с именем монеты.
@@ -16,11 +24,14 @@ Dont forget edit cfg.py the first!
 
 !-Не все исключения обрабатываются корректно-!
 
-# find.py - Поиск арбитражных пар.
+## find.py - Поиск арбитражных пар.
 Ищет прибыльные обменные цепочки. Пересчёт на рубли.
 
-# fmaxspr.py
+## fmaxspr.py
 Поиск пар со спредом и объемом больше заданных.
 
-# findmin.py
+## findmin.py
 Поиск дешёвых пар.
+
+## balance.py
+Считает баланс аккаунта по реальным текущим ценам спроса и предложения.

@@ -6,6 +6,7 @@
 import requests
 import json
 from decimal import Decimal
+from cfg import *
 
 #############################
 VOL = "2000"
@@ -46,7 +47,7 @@ res_obj = json.loads(res.text) # переводим полученный тек�
 allpairs = []
 cnt = 0
 for pair in res_obj['pairs']:
-    if pair.endswith('_rur'):
+    if pair.endswith('_' + CURRENCY):
         allpairs.append(pair)
         cnt = cnt +1
 print(cnt, 'пар')

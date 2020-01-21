@@ -6,7 +6,9 @@
 import requests
 import json
 from decimal import Decimal
+from cfg import *
 
+limit = "0.0009"
 
 # Получаем цены = list[str, str]
 def GetInfo(pair):
@@ -35,7 +37,7 @@ res_obj = json.loads(res.text) # переводим полученный тек�
 allpairs = []
 cnt = 0
 for pair in res_obj['pairs']:
-    if pair.endswith('_rur'):
+    if pair.endswith('_' + CURRENCY):
         allpairs.append(pair)
         cnt = cnt +1
 print(cnt, 'пар')
@@ -47,7 +49,7 @@ for pair in allpairs:
         this_pair_info = GetInfo(pair)
         thisprice = Decimal(Ask_Price(this_pair_info[pair], 0)).quantize(Decimal("1.00000000"))
         print('\rProcess: {} {}'.format(str(cnt), pair), end='     ')
-        if thisprice < Decimal("0.0009") and thisprice > Decimal("0"):
+        if thisprice < Decimal(limit) and thisprice > Decimal("0"):
             print(' ')
             print(pair, thisprice)
     except:

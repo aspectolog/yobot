@@ -1,11 +1,11 @@
  
-TRADE_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-SECRET = b'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY'
+TRADE_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+SECRET = b'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY'
 nonce_file = "./nonce"
-INTERVAL = 15
+CURRENCY = "rur" # or btc, eth, doge, waves, usd - all of them not tested but must working :)
+INTERVAL = 60 # default value
 
 #############################
-# Параметры стоп-файла
 
 STOP_FILE = "./pairs/"   # Путь к стопфайлу
 SELLSPREAD = "0.2"

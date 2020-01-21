@@ -1,3 +1,4 @@
+ 
 import hashlib
 import hmac
 import http.client
@@ -13,11 +14,11 @@ from cfg import *  # Читаем наш конфиг
 
 if len(sys.argv) == 2:
     P = sys.argv[1]
-    PAIR = P + '_rur'
+    PAIR = P + '_' + CURRENCY
 elif len(sys.argv) == 3:
     P = sys.argv[2]
-    PAIR = P + '_rur'
-    time.sleep(int(sys.argv[1]))
+    PAIR = P + '_' + CURRENCY
+    INTERVAL = int(sys.argv[1])
 else:
     PAIR = '404_rur'
     P = '404'
