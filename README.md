@@ -1,7 +1,7 @@
 # bot.py - YoBit spread bot
-###Keep the first position in the spread.
+### Keep the first position in the spread.
 
-####Using:
+#### Using:
 1. Edit **cfg.py**
 3. Make sure you have opened position in target pair.
 4. Run this script:
@@ -23,6 +23,8 @@ If [coin] is not specified, will used **404_rur** pair by default.
 !-Значения в контрольном файле создаются криво. Необходимо пофиксить перед использованием-!
 
 !-Не все исключения обрабатываются корректно-!
+
+------------
 
 ## find.py - Поиск арбитражных пар.
 Ищет прибыльные обменные цепочки. Пересчёт на рубли.
